@@ -194,6 +194,7 @@ namespace Instance_Timer
                 backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
                 backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
                 backgroundWorker.RunWorkerAsync("Press enter in the next 5 seconds");
+                //test
             }
 
             if (statustimer == false) 
