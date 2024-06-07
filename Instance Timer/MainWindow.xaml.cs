@@ -23,7 +23,7 @@ namespace Instance_Timer
         public static string Outputfilename = "InstanceTimer.txt";
 
         public static bool AlarmTriggerMet;
-        public static string AlarmTimer = "03:00:00";
+        public static string AlarmTimer = "04:00:00";
 
         public static bool arewerunning = false;
 
@@ -55,7 +55,7 @@ namespace Instance_Timer
             if  (StopWatchTime == AlarmTimer)
                 {
                     AlarmTriggerMet = true;
-                    Console.WriteLine("Alarm Met");
+                    MessageBox.Show("Endtime reached");
                 }
             
         }
@@ -202,12 +202,6 @@ namespace Instance_Timer
             }
 
         }
-
-
-
-
-
-
     }
 
 
