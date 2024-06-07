@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Instance_Timer
 {
@@ -23,7 +24,7 @@ namespace Instance_Timer
         public static string Outputfilename = "InstanceTimer.txt";
 
         public static bool AlarmTriggerMet;
-        public static string AlarmTimer = "04:00:00";
+        public static string AlarmTimer = "03:55:00";
 
         public static bool arewerunning = false;
 
@@ -55,7 +56,8 @@ namespace Instance_Timer
             if  (StopWatchTime == AlarmTimer)
                 {
                     AlarmTriggerMet = true;
-                    MessageBox.Show("Endtime reached");
+                    //MessageBox.Show("Endtime reached");
+                    MainWindowProp(Brushes.Red);
                 }
             
         }
@@ -70,8 +72,6 @@ namespace Instance_Timer
                     {
                         try
                         {
-
-
                             timer_sb.Clear();
                             timer_sb.AppendFormat("{0:hh\\:mm\\:ss}", watch.Elapsed);
 
@@ -81,7 +81,7 @@ namespace Instance_Timer
 
                             AppWindow.timerlabel.Content = timer_sb.ToString();
 
-                            ExportCounter(timer_sb.ToString(), MainWindow.AppWindow.instance_ownname.Text);
+                            //ExportCounter(timer_sb.ToString(), MainWindow.AppWindow.instance_ownname.Text);
                         }
                         catch (Exception e2)
                         {
@@ -92,7 +92,26 @@ namespace Instance_Timer
 
                     Thread.Sleep(1000);
                 } while (true);
+        }
 
+
+
+
+        public static void MainWindowProp(Brush brushes)
+        {
+            AppWindow.InstanceTimer.Dispatcher.Invoke((Action)(() =>
+            {
+                try
+                {
+                    //Brushes.Red
+                    AppWindow.InstanceTimer.Background = brushes;
+
+                }
+                catch (Exception e2)
+                {
+                    MessageBox.Show(e2.ToString());
+                }
+            }));
         }
 
 
@@ -141,11 +160,12 @@ namespace Instance_Timer
                     {
                         AppWindow.startbutton.Content = "Stop";
                         ControlStopWatch(true);
-                        AppWindow.instance_ownname.IsEnabled = false;
+                        //AppWindow.instance_ownname.IsEnabled = false;
                         AlarmTriggerMet = false;
                         arewerunning = true;
+                        MainWindowProp(Brushes.Black);
 
-    }
+                    }
                     catch (Exception e2)
                     {
                         MessageBox.Show(e2.ToString());
@@ -161,7 +181,7 @@ namespace Instance_Timer
                     {
                         AppWindow.startbutton.Content = "Start";
                         ControlStopWatch(false);
-                        AppWindow.instance_ownname.IsEnabled = true;
+                        //AppWindow.instance_ownname.IsEnabled = true;
                         arewerunning = false;
                         if (File.Exists(Currentfolder + "\\" + Outputfilename)) { File.Delete(Currentfolder + "\\" + Outputfilename); }
                     }
